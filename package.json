@@ -19,7 +19,9 @@
   "scripts": {
     "build": "tsc --noEmit",
     "test": "vitest run",
-    "scenario": "tsx src/run-scenarios.ts"
+    "scenario": "tsx src/run-scenarios.ts",
+    "dotnet:test": "dotnet test csharp/DeliveryModernizationGates.Tests/DeliveryModernizationGates.Tests.csproj",
+    "dotnet:scenario": "dotnet run --project csharp/DeliveryModernizationGates.Scenarios/DeliveryModernizationGates.Scenarios.csproj"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

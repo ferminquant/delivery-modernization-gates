@@ -4,6 +4,8 @@ A focused CI/CD modernization example for trunk-based delivery, automated gates,
 
 This repository backs the Delivery Modernization case study at [ferminquant.com](https://ferminquant.com/examples/delivery/trunk-based-modernization/). It is intentionally small: the point is to show delivery-system judgment, not to hide the signal inside a large service.
 
+The primary implementation is C#/.NET because this kind of modernization work often lands in enterprise backend teams. A TypeScript version is included as a parallel implementation of the same policy.
+
 ## What It Demonstrates
 
 - A balanced move from release branches to trunk-based delivery.
@@ -15,6 +17,15 @@ This repository backs the Delivery Modernization case study at [ferminquant.com]
 
 ## Commands
 
+C#/.NET:
+
+```bash
+dotnet test csharp/DeliveryModernizationGates.Tests/DeliveryModernizationGates.Tests.csproj
+dotnet run --project csharp/DeliveryModernizationGates.Scenarios/DeliveryModernizationGates.Scenarios.csproj
+```
+
+TypeScript:
+
 ```bash
 npm install
 npm test
@@ -22,20 +33,22 @@ npm run build
 npm run scenario
 ```
 
-`npm run scenario` prints the before/after delivery model and the gate report for each sample change set.
+Both scenario commands print the before/after delivery model and the gate report for each sample change set.
 
 ## How To Evaluate This Repository
 
-Start with the delivery policy, then look at the scenarios and tests:
+Start with the C# delivery policy, then compare the TypeScript version if useful:
 
-1. Read [`src/delivery-gates.ts`](src/delivery-gates.ts).
+1. Read [`csharp/DeliveryModernizationGates/DeliveryGate.cs`](csharp/DeliveryModernizationGates/DeliveryGate.cs).
    The gate encodes the delivery policy: integrate to `main`, keep branches short-lived, require automated validation, and reject unsafe migrations.
-2. Read [`src/scenarios.ts`](src/scenarios.ts).
+2. Read [`csharp/DeliveryModernizationGates/Scenarios.cs`](csharp/DeliveryModernizationGates/Scenarios.cs).
    The scenarios compare a stale release branch, a healthy short-lived branch into `main`, and a reckless direct-to-main change.
-3. Run `npm test`.
+3. Run `dotnet test csharp/DeliveryModernizationGates.Tests/DeliveryModernizationGates.Tests.csproj`.
    The tests show that trunk-based delivery is not a shortcut around validation.
 4. Read [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-   The workflow is the minimal public version of the gate: install, test, build, and run scenario output on `main` and pull requests.
+   The workflow validates both the C# and TypeScript implementations on `main` and pull requests.
+
+The TypeScript implementation lives in [`src/delivery-gates.ts`](src/delivery-gates.ts), with tests in [`test/delivery-gates.test.ts`](test/delivery-gates.test.ts). It mirrors the same delivery policy so the case study can show the model across two common backend/platform stacks.
 
 Good signals to look for:
 
