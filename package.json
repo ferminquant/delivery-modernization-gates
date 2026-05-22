@@ -1,0 +1,30 @@
+{
+  "name": "delivery-modernization-gates",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A focused CI/CD modernization example for trunk-based delivery, automated gates, and release-risk reduction.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferminquant/delivery-modernization-gates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ferminquant/delivery-modernization-gates/issues"
+  },
+  "homepage": "https://github.com/ferminquant/delivery-modernization-gates#readme",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "vitest run",
+    "scenario": "tsx src/run-scenarios.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.0"
+  }
+}
